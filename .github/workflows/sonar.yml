@@ -25,3 +25,5 @@ jobs:
           args: >
             -Dsonar.organization=shibinkoshygit
             -Dsonar.projectKey=shibinkoshygit_xwiki-platform
+            -Dsonar.exclusions=**/*.java
+            -Dsonar.sources=.
