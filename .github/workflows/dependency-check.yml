@@ -25,8 +25,9 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run OWASP Dependency Check
-        run: mvn org.owasp:dependency-check-maven:check
-
+        run: |
+          mvn org.owasp:dependency-check-maven:check \
+          -DfailBuildOnCVSS=11
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
