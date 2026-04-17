@@ -21,19 +21,15 @@ jobs:
       - name: Build project (skip tests)
         run: mvn clean install -DskipTests
 
+      - name: Build project
+        run: mvn clean install -DskipTests
+
       - name: Run OWASP Dependency Check
-        run: |
-          mvn org.owasp:dependency-check-maven:check \
-          -DfailBuildOnCVSS=11 \
-          -DnodeAuditAnalyzerEnabled=false \
-          -DpnpmAuditAnalyzerEnabled=false \
-          -DyarnAuditAnalyzerEnabled=false \
-          -DnpmAuditAnalyzerEnabled=false \
-          -DretireJsAnalyzerEnabled=false
+        run: mvn org.owasp:dependency-check-maven:check
 
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
-          path: '**/dependency-check-report.html'
+          path: '**/target/dependency-check-report.html'
